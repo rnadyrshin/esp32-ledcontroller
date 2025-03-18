@@ -1,9 +1,18 @@
 {
-    "idf.espIdfPath": "/Users/ruslan/esp/v5.1.5/esp-idf",
+    "idf.espIdfPath": "/Users/ruslan/esp/v5.1.6/esp-idf",
     "idf.toolsPath": "/Users/ruslan/.espressif",
     "idf.openOcdConfigs": [
         "board/esp32s3-builtin.cfg"
     ],
     "idf.flashType": "UART",
-    "idf.port": "/dev/tty.usbmodem11101"
+    "idf.port": "/dev/tty.usbmodem1301",
+    "idf.pythonInstallPath": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+    "files.associations": {
+        "__availability": "cpp",
+        "__locale": "cpp",
+        "locale": "cpp",
+        "version": "cpp",
+        "ostream": "cpp",
+        "print": "cpp"
+    }
 }

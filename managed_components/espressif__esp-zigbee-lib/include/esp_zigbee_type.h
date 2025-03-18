@@ -206,6 +206,7 @@ union esp_zb_zcl_attr_var_u {
     int32_t s32;        /*!< Signed 32-bit of the integer */
     esp_zb_uint48_t u48;/*!< Unsigned 48-bit of the integer */
     uint8_t data_buf[4];/*!< Data array */
+    float f32;          /*!< Single precision, ESP_ZB_ZCL_ATTR_TYPE_SINGLE data type */
 };
 
 /**
@@ -216,7 +217,7 @@ typedef struct esp_zb_zcl_reporting_info_s {
     uint8_t direction;              /*!< Direction: report is send or received */
     uint8_t ep;                     /*!< Endpoint number */
     uint16_t cluster_id;            /*!< Cluster ID for reporting */
-    uint8_t cluster_role;           /*!< Cluster rolo server/client */
+    uint8_t cluster_role;           /*!< Cluster role server/client */
     uint16_t attr_id;               /*!< Attribute ID for reporting */
     uint8_t flags;                  /*!< Flags to inform status of reporting */
     uint64_t run_time;              /*!< Time to run next reporting activity */
@@ -457,6 +458,7 @@ typedef struct esp_zb_shade_config_cluster_cfg_s {
 typedef struct esp_zb_binary_input_cluster_cfg_s {
     bool  out_of_service;                              /*!< Out of Service */
     uint8_t  status_flags;                             /*!< Status flags */
+    bool present_value;                                /*!< Present value */
 } esp_zb_binary_input_cluster_cfg_t;
 
 /**

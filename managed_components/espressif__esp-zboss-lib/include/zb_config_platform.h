@@ -41,6 +41,7 @@
 #include "hal/gpio_types.h"
 #include "hal/uart_types.h"
 #include "driver/uart.h"
+#include "esp_ieee802154_types.h"
 
 #define ZB_ESP
 #define ZB_CONFIG_ESP
@@ -122,6 +123,33 @@ typedef struct {
 
 typedef void (*esp_rcp_failure_callback_t)(uint8_t param);
 
+typedef struct {
+    uint8_t csma_min_be;        /*!< The minimum value of the backoff exponent, BE, in the CSMA-CA algorithm. */
+    uint8_t csma_max_be;        /*!< The maximum value of the backoff exponent, BE, in the CSMA-CA algorithm. */
+    uint8_t csma_max_backoffs;  /*!< The maximum number of backoffs the CSMA-CA algorithm will attempt before
+                                     declaring a channel access failure. */
+} esp_zb_platform_mac_config_t;
+
+/**
+ * @brief A callback for user to obtain the MAC raw frame
+ *
+ * @param[in] frame The MAC raw frame
+ * @param[in] info The basic information of MAC raw frame
+ * @return
+ *      - true: Indicates the stack should drop this frame
+ *      - false: Indicates the stack should continue to handle the frame
+ */
+typedef bool (*esp_zb_mac_raw_frame_callback_t)(const uint8_t *frame, const esp_ieee802154_frame_info_t *info);
+
+/**
+ * @brief Register a callback to intercept the MAC raw frame.
+ *
+ * @param[in] cb A callback will be raised when receiving the MAC raw frame
+ * @return
+ *      - ESP_OK: On success, otherwise, failed
+ */
+esp_err_t esp_zb_mac_raw_frame_handler_register(esp_zb_mac_raw_frame_callback_t cb);
+
 /**
  * @brief  Set the espressif soc platform config
  *
@@ -139,6 +167,29 @@ esp_err_t esp_zb_platform_config(esp_zb_platform_config_t *config);
  *
  */
 esp_zb_platform_config_t* esp_zb_platform_config_get(void);
+
+/**
+ * @brief  Set the espressif platform mac config
+ *
+ * @param[in] config - pointer to platform mac configuration @ref esp_zb_platform_mac_config_t
+ *
+ * @return - ESP_OK on success
+ *         - ESP_ERR_INVALID_ARG if @p config is invalid or with invalid values.
+ *         - ESP_ERR_NOT_SUPPORTED if ZB_RADIO_NATIVE is not enabled.
+ *
+ */
+esp_err_t esp_zb_platform_mac_config_set(const esp_zb_platform_mac_config_t *config);
+
+/**
+ * @brief  Get the espressif platform mac config
+ *
+ * @param[out] config - pointer to platform mac configuration @ref esp_zb_platform_mac_config_t
+ *
+ * @return - ESP_OK on success
+ *         - ESP_ERR_NOT_SUPPORTED if ZB_RADIO_NATIVE is not enabled.
+ *
+ */
+esp_err_t esp_zb_platform_mac_config_get(esp_zb_platform_mac_config_t *config);
 
 /**
  * @brief  Deinitialize the RCP

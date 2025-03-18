@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2022-2024 Espressif Systems (Shanghai) CO LTD
+ * SPDX-FileCopyrightText: 2022-2025 Espressif Systems (Shanghai) CO LTD
  *
  * SPDX-License-Identifier: Unlicense OR CC0-1.0
  */
@@ -59,7 +59,7 @@ uint32_t xTaskGetTickCount(void)
 }
 
 /// Queue mock
-QueueHandle_t xQueueCreate( uint32_t uxQueueLength, uint32_t uxItemSize )
+QueueHandle_t xQueueCreate(uint32_t uxQueueLength, uint32_t uxItemSize)
 {
     g_size = uxItemSize;
     g_queue = malloc((uxQueueLength) * (uxItemSize));
@@ -67,7 +67,7 @@ QueueHandle_t xQueueCreate( uint32_t uxQueueLength, uint32_t uxItemSize )
 }
 
 
-void vQueueDelete( QueueHandle_t xQueue )
+void vQueueDelete(QueueHandle_t xQueue)
 {
     free(xQueue);
 }
@@ -117,7 +117,46 @@ void esp_log_write(esp_log_level_t level, const char *tag, const char *format, .
 {
 }
 
+void esp_log(esp_log_config_t config, const char *tag, const char *format, ...)
+{
+}
+
 uint32_t esp_log_timestamp(void)
 {
     return 0;
+}
+
+void *mdns_mem_malloc(size_t size)
+{
+    return malloc(size);
+}
+
+void *mdns_mem_calloc(size_t num, size_t size)
+{
+    return calloc(num, size);
+}
+
+void mdns_mem_free(void *ptr)
+{
+    free(ptr);
+}
+
+char *mdns_mem_strdup(const char *s)
+{
+    return strdup(s);
+}
+
+char *mdns_mem_strndup(const char *s, size_t n)
+{
+    return strndup(s, n);
+}
+
+void *mdns_mem_task_malloc(size_t size)
+{
+    return malloc(size);
+}
+
+void mdns_mem_task_free(void *ptr)
+{
+    free(ptr);
 }

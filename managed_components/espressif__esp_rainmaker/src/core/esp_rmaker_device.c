@@ -55,6 +55,7 @@ esp_err_t esp_rmaker_device_delete(const esp_rmaker_device_t *device)
         if (_device->type) {
             free(_device->type);
         }
+        free(_device);
         return ESP_OK;
     }
     return ESP_ERR_INVALID_ARG;
@@ -181,7 +182,7 @@ esp_err_t esp_rmaker_device_add_param(const esp_rmaker_device_t *device, const e
             /* The device callback should be invoked once with the stored value, so
              * that applications can do initialisations as required.
              */
-            if (_device->write_cb) {
+            if (_device->bulk_write_cb) {
                 /* However, the callback should be invoked, only if the parameter is not
                  * of type ESP_RMAKER_PARAM_NAME, as it has special handling internally.
                  */
@@ -189,7 +190,11 @@ esp_err_t esp_rmaker_device_add_param(const esp_rmaker_device_t *device, const e
                     esp_rmaker_write_ctx_t ctx = {
                         .src = ESP_RMAKER_REQ_SRC_INIT,
                     };
-                    _device->write_cb(device, param, stored_val, _device->priv_data, &ctx);
+                    esp_rmaker_param_write_req_t write_req = {
+                        .param = (esp_rmaker_param_t *)param,
+                        .val = stored_val,
+                    };
+                    _device->bulk_write_cb(device, &write_req, 1, _device->priv_data, &ctx);
                 }
             }
         } else {

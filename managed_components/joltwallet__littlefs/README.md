@@ -15,7 +15,7 @@ There are two ways to add this component to your project
 1. As a ESP-IDF managed component: In your project directory run
 
 ```
-idf.py add-dependency joltwallet/littlefs==1.14.8
+idf.py add-dependency joltwallet/littlefs==1.18.1
 ```
 
 2. As a submodule: In your project, add this as a submodule to your `components/` directory.
@@ -62,7 +62,7 @@ nvs,      data, nvs,      0x9000,  0x5000,
 otadata,  data, ota,      0xe000,  0x2000,
 app0,     app,  ota_0,    0x10000, 0x1E0000,
 app1,     app,  ota_1,    0x1F0000,0x1E0000,
-littlefs, data, spiffs,   0x3D0000,0x20000,
+littlefs, data, littlefs,   0x3D0000,0x20000,
 coredump, data, coredump, 0x3F0000,0x10000,
 ```
 
@@ -103,9 +103,7 @@ Also see the comments in `include/esp_littlefs.h`
 Slight differences between this configuration and SPIFFS's configuration is in the `esp_vfs_littlefs_conf_t`:
 
 1. `max_files` field doesn't exist since we removed the file limit, thanks to @X-Ryl669
-2. `partition_label` is not allowed to be `NULL`. You must specify the partition name from your partition table. This is because there isn't a define `littlefs` partition subtype in `esp-idf`. The subtype doesn't matter.
-    * Alternatively, you can specify an `esp_partition_t*` to a `partition` and set `partition_label=NULL`.
-3. `grow_on_mount` will expand an existing filesystem to fill the partition. Defaults to `false`.
+2. `grow_on_mount` will expand an existing filesystem to fill the partition. Defaults to `false`.
     * LittleFS filesystems can only grow, they cannot shrink.
 
 ### Filesystem Image Creation
@@ -113,8 +111,10 @@ Slight differences between this configuration and SPIFFS's configuration is in t
 At compile time, a filesystem image can be created and flashed to the device by adding the following to your project's `CMakeLists.txt` file:
 
 ```
-littlefs_create_partition_image(partition_name path_to_folder_containing_files)
+littlefs_create_partition_image(partition_name path_to_folder_containing_files FLASH_IN_PROJECT)
 ```
+
+If `FLASH_IN_PROJECT` is not specified, the image will still be generated, but you will have to flash it manually using `esptool.py`, `parttool.py`, or a custom build system target.
 
 For example, if your partition table looks like:
 
@@ -126,12 +126,22 @@ factory,  app,  factory,  0x10000, 1M,
 graphics,  data, spiffs,         ,  0xF0000, 
 ```
 
-and your project has a folder called `device_graphics`, your call should be:
+change it to: 
 
 ```
-littlefs_create_partition_image(graphics device_graphics)
+# Name,   Type, SubType,  Offset,  Size, Flags
+nvs,      data, nvs,      0x9000,  0x6000,
+phy_init, data, phy,      0xf000,  0x1000,
+factory,  app,  factory,  0x10000, 1M,
+graphics,  data, littlefs,         ,  0xF0000, 
 ```
 
+
+and your project has a folder called `device_graphics/`, your call should be:
+
+```
+littlefs_create_partition_image(graphics device_graphics FLASH_IN_PROJECT)
+```
 
 
 # Performance

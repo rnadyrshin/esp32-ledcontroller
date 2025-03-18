@@ -47,6 +47,7 @@ The following wake words are supported in esp-sr:
 |Hi,Joy           |                                        | wn9_hijoy_tts          |
 |Hey,Wand         |                                        | wn9_heywanda_tts       |
 |Astrolabe        |                                        | wn9_astrolabe_tts      |
+|Hi,Jason         |                                        | wn9_hijason_tts2       |
 |你好小鑫         |                                        | wn9_nihaoxiaoxin_tts   |
 |小美同学         |                                        | wn9_xiaomeitongxue_tts |
 |Hi,小星          |                                        | wn9_hixiaoxing_tts     |
@@ -54,11 +55,13 @@ The following wake words are supported in esp-sr:
 |喵喵同学         |                                        | wn9_miaomiaotongxue_tts|
 |Hi,喵喵          |                                        | wn9_himiaomiao_tts     |
 |Hi,Lily/Hi,莉莉  |                                        | wn9_hilili_tts         |
-|Hi,Telly/Hi,泰力 |                                        | wn9_hitelly_tts         |
+|Hi,Telly/Hi,泰力 |                                        | wn9_hitelly_tts        |
 |小滨小滨/小冰小冰|                                        | wn9_xiaobinxiaobin_tts |
 |Hi,小巫          |                                        | wn9_haixiaowu_tts      |
+|小鸭小鸭         |                                        | wn9_xiaoyaxiaoya_tts2  |
+|璃奈板           |                                        | wn9_linaiban_tts2      |
 
-*NOTE:* `_tts` suffix means this WakeNet model is trained by TTS samples.
+*NOTE:* `_tts` suffix means this WakeNet model is trained by TTS samples. `_tts2` suffix means this WakeNet model is trained by TTS Pipeline V2.
 
 ## Speech Command Recognition
 

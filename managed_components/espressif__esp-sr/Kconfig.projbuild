@@ -105,7 +105,7 @@ choice SR_WN_MODEL_LOAD
     config SR_WN_WN9_HIMFIVE
         bool "Hi,M Five (wn9_himfive)"
         depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
-
+    
     config SR_WN_WN9_NIHAOXIAOZHI_TTS
         bool "你好小智 (wn9_nihaoxiaozhi_tts)"
         depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
@@ -184,6 +184,18 @@ choice SR_WN_MODEL_LOAD
 
     config SR_WN_WN9_ASTROLABE_TTS
         bool "Astrolabe (wn9_astrolabe_tts)"
+        depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+
+    config SR_WN_WN9_XIAOYAXIAOYA_TTS2
+        bool "小鸭小鸭 (wn9_xiaoyaxiaoya_tts2)"
+        depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+    
+    config SR_WN_WN9_HIJASON_TTS2
+        bool "Hi,Jason (wn9_hijason_tts2)"
+        depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+
+    config SR_WN_WN9_LINAIBAN_TTS2
+        bool "璃奈板 (wn9_linaiban_tts2)"
         depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
 
     config SR_WN_WN9_CUSTOMWORD
@@ -291,6 +303,18 @@ menu "Load Multiple Wake Words"
 
     config SR_WN_WN9_ASTROLABE_TTS_MULTI
     bool "Astrolabe (wn9_astrolabe_tts)"
+    depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+
+    config SR_WN_WN9_XIAOYAXIAOYA_TTS2_MULTI
+    bool "小鸭小鸭 (wn9_xiaoyaxiaoya_tts2)"
+    depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+
+    config SR_WN_WN9_HIJASON_TTS2_MULTI
+    bool "Hi,Jason (wn9_hijason_tts2)"
+    depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
+
+    config SR_WN_WN9_LINAIBAN_TTS2_MULTI
+    bool "璃奈板 (wn9_linaiban_tts2)"
     depends on IDF_TARGET_ESP32S3 || IDF_TARGET_ESP32P4
 
 endmenu

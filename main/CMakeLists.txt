@@ -1,5 +1,5 @@
 idf_component_register(
-			SRC_DIRS "." ${SRCDIRS}
+			SRC_DIRS "." "mdns" "ota" ${SRCDIRS}
 			INCLUDE_DIRS ${INCLUDEDIRS}
 			REQUIRES 
             ESP32-HUB75-MatrixPanel-I2S-DMA 
@@ -18,7 +18,6 @@ idf_component_register(
             esp_netif 
             esp_http_server 
             esp_event esp_common 
-            dns_server
             app_update
-            EMBED_TXTFILES web/index.html
+            EMBED_TXTFILES ota/index.html
             )

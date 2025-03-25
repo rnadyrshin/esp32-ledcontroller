@@ -13,7 +13,8 @@
         "locale": "cpp",
         "version": "cpp",
         "ostream": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "esp_log.h": "c"
     },
     "idf.customExtraVars": {
         "OPENOCD_SCRIPTS": "/Users/ruslan/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/share/openocd/scripts",

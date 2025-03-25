@@ -192,13 +192,13 @@ dependencies:
   espressif/esp_rcp_update:
     component_hash: c10afbd54a17f27eed880e61262b161656e6d36ad63376c307f9273e99d0abcd
     dependencies:
-    - name: idf
-      require: private
-      version: '>=5.0'
     - name: espressif/esp-serial-flasher
       registry_url: https://components.espressif.com
       require: private
       version: ~0.0.0
+    - name: idf
+      require: private
+      version: '>=5.0'
     source:
       registry_url: https://components.espressif.com
       type: service
@@ -265,7 +265,7 @@ dependencies:
       type: service
     version: 1.0.20~2
   espressif/mdns:
-    component_hash: 77ece55f01ce3723d8f1baff6e586fdb342adcbf956e39509a4fa323f278f290
+    component_hash: 3ec0af5f6bce310512e90f482388d21cc7c0e99668172d2f895356165fc6f7c5
     dependencies:
     - name: idf
       require: private
@@ -273,7 +273,7 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.8.1
+    version: 1.8.2
   espressif/network_provisioning:
     component_hash: ef2e10182fd1861e68b821491916327c25416ca7ae70e5a6e43313dbc71fe993
     dependencies:
@@ -332,6 +332,6 @@ direct_dependencies:
 - espressif/rmaker_common
 - idf
 - joltwallet/littlefs
-manifest_hash: dfff5c513cfbdf5fe9a48b5ecbbfea7296f2f863349b10a595ca97c7bddfff70
+manifest_hash: f00f704576ce49eb937cbe7e1641563a2256aa8409eba8a63f071d171ef84de5
 target: esp32s3
 version: 2.0.0
